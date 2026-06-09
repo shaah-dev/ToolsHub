@@ -2,8 +2,6 @@
 
 A beautiful, fast, and fully offline file converter web app built for everyone — Convert images, documents, and more instantly in your browser.
 
-![ToolHub Preview](https://tools-hubs.vercel.app/)
-
 ## ✨ Features
 
 - **12 Powerful Tools** — Image converters, PDF tools, utilities & more
