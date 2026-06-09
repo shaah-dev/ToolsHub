@@ -2,7 +2,7 @@
 
 A beautiful, fast, and fully offline file converter web app built for everyone — Convert images, documents, and more instantly in your browser.
 
-![ToolHub Preview](https://via.placeholder.com/800x400?text=ToolHub+Preview)
+![ToolHub Preview](https://tools-hubs.vercel.app/)
 
 ## ✨ Features
 
@@ -29,7 +29,7 @@ A beautiful, fast, and fully offline file converter web app built for everyone �
 
 ## 🚀 How to Use
 
-1. Open `index.html` in any browser
+1. Open `(https://tools-hubs.vercel.app/)` in any browser
 2. Start converting instantly!
 
 ## 🛠 Tech Stack
