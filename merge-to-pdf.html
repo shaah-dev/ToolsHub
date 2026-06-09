@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merge Images to PDF - ToolsHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; }
+    </style>
+</head>
+<body class="bg-zinc-50 min-h-screen dark:bg-zinc-950">
+
+    <div class="max-w-lg mx-auto px-4 py-8">
+        <a href="index.html" class="inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-700 mb-8">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </a>
+
+        <div class="bg-white dark:bg-zinc-900 rounded-3xl shadow-xl p-8 md:p-10">
+            <div class="text-center mb-10">
+                <div class="w-20 h-20 mx-auto bg-red-100 dark:bg-red-900 text-red-600 rounded-2xl flex items-center justify-center text-4xl mb-4">📑</div>
+                <h1 class="text-3xl font-semibold text-zinc-900 dark:text-white">Merge Images to PDF</h1>
+            </div>
+
+            <div class="space-y-6">
+                <div id="dropzone" class="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-8 text-center hover:border-red-400 transition-colors cursor-pointer">
+                    <i class="fa-solid fa-cloud-arrow-up text-4xl text-zinc-400 mb-3"></i>
+                    <p class="text-zinc-600 dark:text-zinc-400">Drop multiple images here</p>
+                    <input type="file" id="upload" class="hidden" accept="image/*" multiple>
+                </div>
+
+                <div id="preview" class="hidden grid grid-cols-2 gap-3">
+                    <!-- Previews will be added dynamically -->
+                </div>
+
+                <button onclick="mergeToPDF()" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-4 rounded-2xl">Merge & Create PDF</button>
+                
+                <button onclick="downloadPDF()" id="downloadBtn" class="hidden w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 rounded-2xl">
+                    Download Merged PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let filesList = [];
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('upload');
+
+        dropzone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            filesList = Array.from(e.target.files);
+            showPreviews();
+        });
+
+        function showPreviews() {
+            const previewContainer = document.getElementById('preview');
+            previewContainer.innerHTML = '';
+            previewContainer.classList.remove('hidden');
+
+            filesList.forEach((file, index) => {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.className = "rounded-xl shadow-sm h-32 object-cover w-full";
+                previewContainer.appendChild(img);
+            });
+        }
+
+        async function mergeToPDF() {
+            if (filesList.length === 0) return alert("Please select at least one image");
+
+            document.getElementById('downloadBtn').classList.remove('hidden');
+            alert("PDF is ready! Click Download button.");
+        }
+
+        function downloadPDF() {
+            if (filesList.length === 0) return;
+
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+
+            filesList.forEach((file, index) => {
+                if (index > 0) pdf.addPage();
+                
+                const img = new Image();
+                img.src = URL.createObjectURL(file);
+                
+                img.onload = () => {
+                    const pageWidth = pdf.internal.pageSize.getWidth();
+                    const ratio = (pageWidth - 20) / img.width;
+                    const height = img.height * ratio;
+                    pdf.addImage(img, 'JPEG', 10, 10, pageWidth - 20, height);
+                    
+                    if (index === filesList.length - 1) {
+                        pdf.save('merged-images.pdf');
+                    }
+                };
+            });
+        }
+    </script>
+</body>
+</html>

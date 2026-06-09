@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resize Image - ToolsHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; }
+    </style>
+</head>
+<body class="bg-zinc-50 min-h-screen dark:bg-zinc-950">
+
+    <div class="max-w-lg mx-auto px-4 py-8">
+        <a href="index.html" class="inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-700 mb-8">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </a>
+
+        <div class="bg-white dark:bg-zinc-900 rounded-3xl shadow-xl p-8 md:p-10">
+            <div class="text-center mb-10">
+                <div class="w-20 h-20 mx-auto bg-violet-100 dark:bg-violet-900 text-violet-600 rounded-2xl flex items-center justify-center text-4xl mb-4">📏</div>
+                <h1 class="text-3xl font-semibold text-zinc-900 dark:text-white">Resize Image</h1>
+            </div>
+
+            <div class="space-y-6">
+                <div id="dropzone" class="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-8 text-center hover:border-violet-400 transition-colors cursor-pointer">
+                    <i class="fa-solid fa-cloud-arrow-up text-4xl text-zinc-400 mb-3"></i>
+                    <p class="text-zinc-600 dark:text-zinc-400">Drop image here or <span class="text-violet-600">browse</span></p>
+                    <input type="file" id="upload" class="hidden" accept="image/*">
+                </div>
+
+                <div id="preview" class="hidden">
+                    <p class="text-sm text-zinc-500 mb-2">Original Preview:</p>
+                    <img id="previewImg" class="max-h-64 mx-auto rounded-2xl shadow-md">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1 text-zinc-700 dark:text-zinc-300">Width (px)</label>
+                        <input type="number" id="width" value="800" class="w-full px-5 py-3 border border-zinc-300 dark:border-zinc-700 rounded-2xl dark:bg-zinc-800">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1 text-zinc-700 dark:text-zinc-300">Height (px)</label>
+                        <input type="number" id="height" value="600" class="w-full px-5 py-3 border border-zinc-300 dark:border-zinc-700 rounded-2xl dark:bg-zinc-800">
+                    </div>
+                </div>
+
+                <button onclick="resizeImage()" class="w-full bg-violet-600 hover:bg-violet-700 text-white font-semibold py-4 rounded-2xl">Resize Image</button>
+                
+                <button onclick="downloadFile()" id="downloadBtn" class="hidden w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 rounded-2xl">
+                    Download Resized Image
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let convertedDataUrl = null;
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('upload');
+
+        dropzone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', handleFile);
+
+        function handleFile() {
+            const file = fileInput.files[0];
+            if (file) {
+                const img = new Image();
+                img.src = URL.createObjectURL(file);
+                img.onload = () => {
+                    document.getElementById('preview').classList.remove('hidden');
+                    document.getElementById('previewImg').src = img.src;
+                };
+            }
+        }
+
+        function resizeImage() {
+            const file = fileInput.files[0];
+            if (!file) return alert("Please select an image");
+
+            const img = new Image();
+            img.src = URL.createObjectURL(file);
+
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = parseInt(document.getElementById('width').value) || img.width;
+                canvas.height = parseInt(document.getElementById('height').value) || img.height;
+                
+                canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+                
+                convertedDataUrl = canvas.toDataURL('image/jpeg', 0.92);
+                document.getElementById('downloadBtn').classList.remove('hidden');
+            };
+        }
+
+        function downloadFile() {
+            if (!convertedDataUrl) return;
+            const link = document.createElement('a');
+            link.href = convertedDataUrl;
+            link.download = 'resized-image.jpg';
+            link.click();
+        }
+    </script>
+</body>
+</html>

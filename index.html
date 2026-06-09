@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolsHub - Convert Anything</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap');
+        
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .logo-font { font-family: 'Space Grotesk', sans-serif; }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover:after { width: 100%; }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-zinc-50">
+
+    <!-- NAVBAR -->
+    <nav class="bg-white border-b border-zinc-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-9 h-9 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">⚡</div>
+                <div class="logo-font text-3xl font-semibold tracking-tighter text-zinc-900">ToolsHub</div>
+            </div>
+            
+            <!-- Centered Navigation -->
+            <div class="hidden md:flex items-center gap-x-8 absolute left-1/2 -translate-x-1/2">
+                <a href="#tools" class="nav-link text-sm font-medium text-zinc-600 hover:text-zinc-900">Tools</a>
+                <a href="about.html" class="nav-link text-sm font-medium text-zinc-600 hover:text-zinc-900">About Developer</a>
+                <a href="contact.html" class="nav-link text-sm font-medium text-zinc-600 hover:text-zinc-900">Contact</a>
+            </div>
+
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-zinc-600 hover:text-zinc-900 transition-colors">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-white z-50 pt-20 px-6">
+        <div class="flex flex-col gap-y-6 text-lg font-medium">
+            <a href="#tools" onclick="toggleMobileMenu()" class="py-3 px-4 hover:bg-zinc-100 rounded-2xl">Tools</a>
+            <a href="about.html" onclick="toggleMobileMenu()" class="py-3 px-4 hover:bg-zinc-100 rounded-2xl">About Developer</a>
+            <a href="contact.html" onclick="toggleMobileMenu()" class="py-3 px-4 hover:bg-zinc-100 rounded-2xl">Contact</a>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero-bg text-white py-20 md:py-28">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-x-2 bg-white/20 text-white text-sm font-medium px-4 py-2 rounded-3xl mb-6 backdrop-blur-sm">
+                <span class="relative flex h-3 w-3">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+                100% Free • No signup • Works Offline
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl font-semibold tracking-tighter leading-none mb-6 logo-font">
+                Convert images,<br>documents &amp; more.<br><span class="text-blue-200">Instantly.</span>
+            </h1>
+            
+            <p class="text-xl text-blue-100 max-w-md mx-auto mb-10">
+                Beautiful, fast, and private file converters that work perfectly on all devices.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#tools" 
+                   class="inline-flex items-center justify-center bg-white text-blue-700 hover:bg-blue-50 font-semibold text-lg px-10 py-4 rounded-2xl transition-all active:scale-95">
+                    Browse All Tools
+                </a>
+                <a href="image-to-pdf.html" 
+                   class="inline-flex items-center justify-center border border-white/70 hover:bg-white/10 font-medium text-lg px-8 py-4 rounded-2xl transition-all">
+                    Try Image to PDF →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOOLS SECTION -->
+    <section id="tools" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="text-center mb-12">
+            <span class="text-blue-600 font-semibold tracking-widest text-sm">12 POWERFUL TOOLS</span>
+            <h2 class="text-4xl font-semibold tracking-tight text-zinc-900 mt-2">Everything you need</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <a href="webp-to-png.html" class="tool-card group rounded-3xl p-8 card-hover flex flex-col">
+                <div class="text-5xl mb-6">🖼️</div>
+                <h3 class="text-2xl font-semibold mb-2">WebP to PNG</h3>
+                <p class="text-zinc-600 flex-1">Convert WebP images to high-quality PNG.</p>
+                <div class="mt-8 text-blue-600 font-medium flex items-center gap-x-2 group-hover:gap-x-3">Convert now <span class="text-xl">→</span></div>
+            </a>
+
+            <a href="png-to-jpg.html" class="tool-card group rounded-3xl p-8 card-hover flex flex-col">
+                <div class="text-5xl mb-6">🔄</div>
+                <h3 class="text-2xl font-semibold mb-2">PNG to JPG</h3>
+                <p class="text-zinc-600 flex-1">Compress PNG files to JPG format.</p>
+                <div class="mt-8 text-blue-600 font-medium flex items-center gap-x-2 group-hover:gap-x-3">Convert now <span class="text-xl">→</span></div>
+            </a>
+
+            <a href="jpg-to-png.html" class="tool-card group rounded-3xl p-8 card-hover flex flex-col">
+                <div class="text-5xl mb-6">🔄</div>
+                <h3 class="text-2xl font-semibold mb-2">JPG to PNG</h3>
+                <p class="text-zinc-600 flex-1">Convert JPG to lossless PNG.</p>
+                <div class="mt-8 text-blue-600 font-medium flex items-center gap-x-2 group-hover:gap-x-3">Convert now <span class="text-xl">→</span></div>
+            </a>
+
+            <a href="image-to-pdf.html" class="tool-card group rounded-3xl p-8 card-hover flex flex-col">
+                <div class="text-5xl mb-6">📑</div>
+                <h3 class="text-2xl font-semibold mb-2">Image to PDF</h3>
+                <p class="text-zinc-600 flex-1">Turn any image into a professional PDF.</p>
+                <div class="mt-8 text-blue-600 font-medium flex items-center gap-x-2 group-hover:gap-x-3">Convert now <span class="text-xl">→</span></div>
+            </a>
+
+            <a href="merge-to-pdf.html" class="tool-card group rounded-3xl p-8 card-hover flex flex-col">
+                <div class="text-5xl mb-6">📑</div>
+                <h3 class="text-2xl font-semibold mb-2">Merge to PDF</h3>
+                <p class="text-zinc-600 flex-1">Combine multiple images into one PDF.</p>
+                <div class="mt-8 text-blue-600 font-medium flex items-center gap-x-2 group-hover:gap-x-3">Merge now <span class="text-xl">→</span></div>
+            </a>
+
+            <a href="word-to-pdf.html" class="tool-card group rounded-3xl p-8 card-hover flex flex-col">
+                <div class="text-5xl mb-6">📄</div>
+                <h3 class="text-2xl font-semibold mb-2">Word to PDF</h3>
+                <p class="text-zinc-600 flex-1">Convert DOCX files to PDF.</p>
+                <div class="mt-8 text-blue-600 font-medium flex items-center gap-x-2 group-hover:gap-x-3">Convert now <span class="text-xl">→</span></div>
+            </a>
+
+            <a href="image-compressor.html" class="tool-card group rounded-3xl p-8 card-hover flex flex-col">
+                <div class="text-5xl mb-6">🗜️</div>
+                <h3 class="text-2xl font-semibold mb-2">Image Compressor</h3>
+                <p class="text-zinc-600 flex-1">Reduce image size without losing quality.</p>
+                <div class="mt-8 text-blue-600 font-medium flex items-center gap-x-2 group-hover:gap-x-3">Compress now <span class="text-xl">→</span></div>
+            </a>
+
+            <a href="resize-image.html" class="tool-card group rounded-3xl p-8 card-hover flex flex-col">
+                <div class="text-5xl mb-6">📏</div>
+                <h3 class="text-2xl font-semibold mb-2">Resize Image</h3>
+                <p class="text-zinc-600 flex-1">Change image dimensions easily.</p>
+                <div class="mt-8 text-blue-600 font-medium flex items-center gap-x-2 group-hover:gap-x-3">Resize now <span class="text-xl">→</span></div>
+            </a>
+
+            <a href="qr-code-generator.html" class="tool-card group rounded-3xl p-8 card-hover flex flex-col">
+                <div class="text-5xl mb-6">📱</div>
+                <h3 class="text-2xl font-semibold mb-2">QR Code Generator</h3>
+                <p class="text-zinc-600 flex-1">Create QR codes instantly.</p>
+                <div class="mt-8 text-blue-600 font-medium flex items-center gap-x-2 group-hover:gap-x-3">Generate now <span class="text-xl">→</span></div>
+            </a>
+
+            <a href="password-generator.html" class="tool-card group rounded-3xl p-8 card-hover flex flex-col">
+                <div class="text-5xl mb-6">🔐</div>
+                <h3 class="text-2xl font-semibold mb-2">Password Generator</h3>
+                <p class="text-zinc-600 flex-1">Create strong secure passwords.</p>
+                <div class="mt-8 text-blue-600 font-medium flex items-center gap-x-2 group-hover:gap-x-3">Generate now <span class="text-xl">→</span></div>
+            </a>
+
+            <a href="stylish-text.html" class="tool-card group rounded-3xl p-8 card-hover flex flex-col">
+                <div class="text-5xl mb-6">✨</div>
+                <h3 class="text-2xl font-semibold mb-2">Stylish Text</h3>
+                <p class="text-zinc-600 flex-1">Transform text into cool styles.</p>
+                <div class="mt-8 text-blue-600 font-medium flex items-center gap-x-2 group-hover:gap-x-3">Try now <span class="text-xl">→</span></div>
+            </a>
+
+            <a href="base64-converter.html" class="tool-card group rounded-3xl p-8 card-hover flex flex-col">
+                <div class="text-5xl mb-6">🔢</div>
+                <h3 class="text-2xl font-semibold mb-2">Base64 Converter</h3>
+                <p class="text-zinc-600 flex-1">Encode and decode Base64 strings.</p>
+                <div class="mt-8 text-blue-600 font-medium flex items-center gap-x-2 group-hover:gap-x-3">Convert now <span class="text-xl">→</span></div>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-zinc-900 text-zinc-400 py-16">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex justify-center items-center gap-x-3 mb-6">
+                <div class="w-8 h-8 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl">⚡</div>
+                <div class="logo-font text-3xl font-semibold text-white tracking-tighter">ToolsHub</div>
+            </div>
+            <p class="text-sm">Made with ❤️ for fast and beautiful conversions</p>
+            <p class="text-xs mt-8 opacity-60">© 2026 ToolsHub • All tools run locally in your browser</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
